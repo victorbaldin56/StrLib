@@ -6,10 +6,10 @@ DEDFLAGS = -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-l
 OBJECTS = strlib.o
 HEADERS = strlib.h
 LIBRARY = strlib.a
+EXECUTABLE = test
 
 %.o: %.cpp $(HEADERS)
-	g++ $(DEDFLAGS) -c $< $^
+	g++ $(DEDFLAGS) -c $< -o $@
 
 $(LIBRARY): $(OBJECTS)
 	ar rcs $(LIBRARY) $(OBJECTS)
-

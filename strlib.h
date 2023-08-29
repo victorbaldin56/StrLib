@@ -16,11 +16,6 @@ size_t str_len(const char str[]);
 /**
  * 
 */
-char *str_rev(char str[]);
-
-/**
- * 
-*/
 const char *str_chr(const char str[], const char ch);
 
 /**

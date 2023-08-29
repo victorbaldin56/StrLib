@@ -1,8 +1,5 @@
 #include <assert.h>
 #include "strlib.h"
-
-static void swap(char *a, char *b);
-
 // strdup getline
 
 char *str_copy(char dest[], const char src[]) {
@@ -30,19 +27,7 @@ size_t str_len(const char str[]) {
         ;
     }
     
-    return i + 1;
-}
-
-char *str_rev(char str[]) {
-    assert(str);
-
-    size_t len = str_len(str);
-    
-    for (size_t i = 0; i < len; i++) {
-        swap(&str[i], &str[len - 1 - i]);     
-    }
-
-    return str; 
+    return i;
 }
 
 const char *str_chr(const char str[], const char ch) {
@@ -69,7 +54,7 @@ int str_cmp(const char l[], const char r[]) {
     
     size_t i = 0;
     
-    while (l[i] && r[i]) {
+    do {
         if (l[i] > r[i]) {
             return 1;
         }
@@ -77,7 +62,7 @@ int str_cmp(const char l[], const char r[]) {
             return -1;
         }
         i++;
-    }
+    } while (l[i] && r[i]);
     
     return 0;
 }
@@ -171,7 +156,7 @@ char *f_get_str(char str[], const size_t count, FILE *file) {
 
     while (c != EOF && i < count - 1) {
         c = fgetc(file);
-        str[i] = (char)c;
+        str[i] = (char)c; //FIXME: EOF
         if (c == '\n') {
             return str;
         }
@@ -202,11 +187,5 @@ size_t getline(char str[], const size_t count) {
     str[i] = '\0';
 
     return i;
-}
-
-static void swap(char *a, char *b) {
-    char tmp = *b;
-    *b = *a;
-    *a = tmp;
 }
 
