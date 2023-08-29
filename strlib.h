@@ -51,6 +51,12 @@ int put_str(const char str[]);
 /**
  * 
 */
-char *f_get_str(char str[], size_t count, FILE *file);
+char *f_get_str(char str[], const size_t count, FILE *file);
+
+/**
+ * 
+*/
+size_t getline(char str[], const size_t count);
+
 
 #endif // STRLIB

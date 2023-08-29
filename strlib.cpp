@@ -3,7 +3,7 @@
 
 static void swap(char *a, char *b);
 
-// fgets strdup getline
+// strdup getline
 
 char *str_copy(char dest[], const char src[]) {
     assert(dest);
@@ -161,7 +161,7 @@ int put_str(const char str[]) {
     return 0;
 }
 
-char *f_get_str(char str[], size_t count, FILE *file) {
+char *f_get_str(char str[], const size_t count, FILE *file) {
     assert(str);
     assert(file);
     assert(count);
@@ -178,9 +178,30 @@ char *f_get_str(char str[], size_t count, FILE *file) {
         i++;
     }
 
-    str[i] = '\n';
+    str[i] = '\0';
 
     return str;
+}
+
+size_t getline(char str[], const size_t count) {
+    assert(str);
+    assert(count);
+
+    int c = getchar();
+    size_t i = 0;
+
+    while (c != EOF && i < count - 1) {
+        c = getchar();
+        str[i] = (char)c;
+        if (c == '\n') {
+            return i;
+        }
+        i++;
+    }
+
+    str[i] = '\0';
+
+    return i;
 }
 
 static void swap(char *a, char *b) {
