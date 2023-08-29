@@ -1,3 +1,6 @@
+#ifndef STRLIB
+#define STRLIB
+
 #include <stdio.h>
 
 /**
@@ -39,3 +42,15 @@ char *str_cat(char dest[], const char src[]);
  * 
 */
 char *str_n_cat(char dest[], const char src[], const size_t count);
+
+/**
+ * 
+*/
+int put_str(const char str[]);
+
+/**
+ * 
+*/
+char *f_get_str(char str[], size_t count, FILE *file);
+
+#endif // STRLIB
