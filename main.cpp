@@ -8,6 +8,7 @@ int main() {
     test_str_chr();
     test_str_len();
     test_str_cmp();
+    test_f_get_str();
     
     return 0;
 }

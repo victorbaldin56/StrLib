@@ -28,4 +28,19 @@ int test_str_len();
 */
 int test_str_cmp();
 
+/**
+ * 
+*/
+int test_str_n_cat();
+
+/**
+ * 
+*/
+int test_put_str();
+
+/**
+ * 
+*/
+int test_f_get_str();
+
 #endif // TEST

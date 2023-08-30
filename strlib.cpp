@@ -154,14 +154,14 @@ char *f_get_str(char str[], const size_t count, FILE *file) {
     int c = fgetc(file);
     size_t i = 0;
 
-    while (c != EOF && i < count - 1) {
+    do {
         c = fgetc(file);
         str[i] = (char)c; //FIXME: EOF
         if (c == '\n') {
             return str;
         }
         i++;
-    }
+    } while (c != EOF && i < count - 1);
 
     str[i] = '\0';
 
