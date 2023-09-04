@@ -51,7 +51,7 @@ char *f_get_str(char str[], const size_t count, FILE *file);
 /**
  * 
 */
-size_t getline(char str[], const size_t count);
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
 
 #endif // STRLIB

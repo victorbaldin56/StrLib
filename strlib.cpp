@@ -1,6 +1,6 @@
 #include <assert.h>
+#include <stdlib.h>
 #include "strlib.h"
-// strdup getline
 
 char *str_copy(char dest[], const char src[]) {
     assert(dest);
@@ -14,7 +14,6 @@ char *str_copy(char dest[], const char src[]) {
     }
 
     dest[i] = '\0';
-    
     return dest;
 }
 
@@ -83,7 +82,7 @@ char *str_n_cpy(char dest[], const char src[], const size_t count) {
     while (i < count) {
         dest[i] = '\0';
     }
-
+    
     return dest;
 }
 
@@ -106,7 +105,6 @@ char *str_cat(char dest[], const char src[]) {
     }
 
     dest[i] = '\0';
-
     return dest;
 }
 
@@ -128,7 +126,6 @@ char *str_n_cat(char dest[], const char src[], const size_t count) {
     }
 
     dest[i] = '\0';
-
     return dest;
 }
 
@@ -142,50 +139,49 @@ int put_str(const char str[]) {
     }
 
     putchar('\n');
-    
     return 0;
 }
 
-char *f_get_str(char str[], const size_t count, FILE *file) {
+char *f_get_str(char str[], const size_t count, FILE *stream) {
     assert(str);
-    assert(file);
+    assert(stream);
     assert(count);
 
-    int c = fgetc(file);
-    size_t i = 0;
-
-    do {
-        c = fgetc(file);
-        str[i] = (char)c; //FIXME: EOF
-        if (c == '\n') {
-            return str;
-        }
-        i++;
-    } while (c != EOF && i < count - 1);
-
-    str[i] = '\0';
-
-    return str;
-}
-
-size_t getline(char str[], const size_t count) {
-    assert(str);
-    assert(count);
-
-    int c = getchar();
+    int c = fgetc(stream);
     size_t i = 0;
 
     while (c != EOF && i < count - 1) {
-        c = getchar();
         str[i] = (char)c;
+        c = fgetc(stream);
         if (c == '\n') {
-            return i;
+            return str;
         }
         i++;
     }
 
     str[i] = '\0';
-
-    return i;
+    return str;
 }
 
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream) {
+    assert(stream);
+    assert(n);
+
+    if (!lineptr) {
+        lineptr = (char **)(calloc(*n, sizeof(char)));
+        if (!lineptr) {
+            return -1;
+        }
+    }
+
+    size_t orig_size = sizeof(**lineptr);
+    if (orig_size < *n) {
+        size_t n_size = sizeof(realloc(lineptr, *n));
+        if (n_size == orig_size) {
+            return -1;
+        }
+    }
+
+    *lineptr = f_get_str(*lineptr, *n, stream);
+    return str_len(*lineptr);
+}

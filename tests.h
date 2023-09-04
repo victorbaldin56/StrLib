@@ -43,4 +43,9 @@ int test_put_str();
 */
 int test_f_get_str();
 
+/**
+ * 
+*/
+int test_get_line();
+
 #endif // TEST

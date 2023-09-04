@@ -42,6 +42,7 @@ int test_str_copy() {
             return -1;
         }
     }
+
     printf("test_str_copy OK\n");
     free(dest);
     return 0;
@@ -57,6 +58,7 @@ int test_str_cat() {
             return -1;
         }
     }
+
     printf("test_str_cat OK\n");
     return 0;
 }
@@ -70,6 +72,7 @@ int test_str_len() {
             return -1;
         }
     }
+
     printf("test_str_len OK\n");
     return 0;
 }
@@ -84,6 +87,7 @@ int test_str_chr() {
             return -1;
         }
     }
+
     printf("test_str_char OK\n");
     return 0;
 }
@@ -98,6 +102,7 @@ int test_str_cmp() {
             return -1;
         }
     }
+
     printf("test_str_cmp OK\n");
     return 0;
 }
@@ -113,6 +118,7 @@ int test_str_n_cat() {
             return -1;
         }
     }
+
     printf("str_n_cat OK\n");
     return 0;
 }
@@ -126,6 +132,7 @@ int test_put_str() {
             return -1;
         }
     }
+
     printf("test_put_str OK\n");
     return 0;
 }
@@ -141,15 +148,35 @@ int test_f_get_str() {
             return -1;
         }
     }
+
+    fclose(testfile);
     printf("test_f_get_str OK\n");
+    return 0;
+}
+
+int test_get_line() {
+    FILE *testfile = fopen("test.txt", "r");
+    char **lineptr = NULL;
+    size_t *n = (size_t *)(calloc(1, sizeof(size_t)));
+    
+    if (getline(lineptr, n, testfile) != get_line(lineptr, n, testfile)) {
+        printf("test_get_line failed\n");
+        return -1;
+    }
+
+    printf("test_get_line OK\n");
+    free(lineptr);
+    free(n);
     return 0;
 }
 
 static size_t lenarr(const char *s[]) {
     size_t i = 0;
+    
     for (i = 0; s[i]; i++) {
         ;
     }
+
     return i;
 }
 
@@ -162,5 +189,6 @@ static size_t maxlenstr(const char *s[]) {
             max = len;
         }
     }
+
     return max;
 } 

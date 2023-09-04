@@ -7,8 +7,8 @@ OBJECTS = strlib.o
 LIBRARY = strlib.a
 
 %.o: %.cpp
-	g++ $(DEDFLAGS) -c $< -o $@
+	$(CC) $(DEDFLAGS) -c $< -o $@
 
 $(LIBRARY): strlib.o
-	ar rcs $(LIBRARY) $(LIBOBJ)
+	ar rcs $(LIBRARY) $(OBJECTS)
 
